@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Booking, Game } from '../../../interface';
 import { formatDate } from '@/utils/formatDate';
 import { fetchGames } from '@/utils/api';
+import { today } from '@/utils/today';
+import { getFutureDate } from '@/utils/futureDate';
 
 interface GamesTableProps {
   bookings: Booking[];
   //startDate: string;
   //endDate: string;
 }
+
+//const today = new Date().toISOString().split("T")[0];
 
 const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
 
@@ -22,6 +26,8 @@ const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
     const [selectedOpen, setSelectedOpen] = useState<string>('');
 
     const [games, setGames] = useState<Game[]>([]);
+
+    const futureDate = getFutureDate();
 
 
     useEffect(() => {
@@ -66,6 +72,7 @@ const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
 
     useEffect(() => {
         let filtered = bookings;
+        
     
         // om både start- och slutdatum är definierade
         if (startDate && endDate) {
@@ -91,7 +98,7 @@ const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
     
 
   return (
-    <div className="flex flex-col justify-center overflow-x-auto ">
+    <div className="flex flex-col justify-center overflow-x-auto pl-2 pr-2">
 
         <div className="flex flex-row gap-4 pb-4">
 
@@ -103,6 +110,8 @@ const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                     className="border p-2 rounded-md mr-2"
+                    min={today}
+                    max={futureDate}
                 />
                 </label>
             </div>
@@ -115,6 +124,8 @@ const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                     className="border p-2 rounded-md mr-2"
+                    min={today}
+                    max={futureDate}
                 />
                 </label>
             </div>

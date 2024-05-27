@@ -32,6 +32,7 @@ export default function Navbar() {
       router.push("/mypage");
     } else {
       alert("Du måste logga in för att kunna gå in på Min sida.")
+      router.push("/");
     }
   }
 

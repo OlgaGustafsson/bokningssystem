@@ -4,7 +4,6 @@ export default function Main({
     children: React.ReactNode
   }) {
     return (
-        
         <main 
         className="h-full min-h-[calc(100ch-6rem)]
         w-screen bg-white flex justify-center"

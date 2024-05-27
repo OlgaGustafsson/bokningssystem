@@ -105,7 +105,7 @@ export default function MyPage() {
             Min sida
         </div>
 
-        <div className="flex flex-col items-left pb-4 pl-24 pr-24 sm:pl-8 sm:pr-8">
+        <div className="overflow-x-auto flex flex-col items-left pb-4 pl-24 pr-24 sm:pl-8 sm:pr-8">
             <div className="bg-stone-100 h-40 rounded-md">
                 <p className="pl-10 pt-10 text-xl text-stone-400">
                     Medlem:
@@ -138,14 +138,14 @@ export default function MyPage() {
                     Stora rummet
                 </p> */}
 
-                <ul className="pl-10 pt-6 flex flex-col gap-4">
+                <ul className="pl-10 pt-6 flex flex-col gap-4 overflow-x-auto">
                     {bookings.map(booking => (
                         <li
                             key={booking.booking_id} 
                             //href={`/mypage/${booking.booking_id}`}
                             className="text-lg text-stone-500 border border-solid rounded-md 
-                                    p-2 flex flex-col">
-                                <div className="flex flex-row gap-4">
+                                    p-2 flex flex-col bg-stone-50">
+                                <div className="flex lg:flex-row md:flex-row sm:flex-col gap-4">
                                     <p className="flex-grow">Datum: {formatDate(booking.booking_date)}</p>
                                     <p className="flex-grow">Rum: {booking.room_name}</p>
                                     <p className="flex-grow">Tid: {booking.time}</p>

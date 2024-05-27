@@ -59,8 +59,9 @@ export default function Games() {
             Tillbaka
           </button>
         </Link> */}
-
+        
         {/* <Link href="/games"> */}
+        {showGamesTable && (
           <button onClick={handleHideBookings}
             className="flex justify-center items-center text-xl w-32 h-12 
               rounded-xl border border-stone-900 bg-white hover:bg-stone-100
@@ -68,6 +69,7 @@ export default function Games() {
           >
             Tömma
           </button>
+          )}
         {/* </Link> */}
 
         <button onClick={handleShowBookings} className="flex justify-center items-center text-xl w-32 h-12 

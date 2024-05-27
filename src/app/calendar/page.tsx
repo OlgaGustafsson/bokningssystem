@@ -2,10 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+//import Link from "next/link";
 import BookingTable from "@/components/BookingTable";
 import { Room } from "../../../interface";
 import { fetchRooms } from "@/utils/api";
+import { today } from "@/utils/today";
+import { getFutureDate } from "@/utils/futureDate";
 
 export default function Calendar() {
   //const [selectedOption, setSelectedOption] = useState("");
@@ -15,6 +17,8 @@ export default function Calendar() {
   const [rooms, setRooms] = useState<Room[]>([]);
   const [showBookingTable, setShowBookingTable] = useState(false);
   const router = useRouter();
+
+  const futureDate = getFutureDate();
 
 
   useEffect(() => {
@@ -33,14 +37,14 @@ export default function Calendar() {
   // }, []);
 
   // välj datum i kalender
-  const handleValueChange = (event) => {
+  const handleValueChange = (event: { target: { value: any; }; }) => {
     const value = event.target.value;
     setSelectedDate(value);
     localStorage.setItem("selectedDate", value);
   };
 
   // välj rum
-  const handleRoomChange = (event) => {
+  const handleRoomChange = (event: { target: { value: any; }; }) => {
     const room = event.target.value;
     setSelectedRoom(room);
     localStorage.setItem("selectedRoom", room);
@@ -87,6 +91,8 @@ export default function Calendar() {
   // console.log(selectedValue);
   // console.log(selectedRoom);
 
+  //const today = new Date().toISOString().split("T")[0];
+
   
   return (
     <>
@@ -94,10 +100,10 @@ export default function Calendar() {
         className="flex flex-col xl:flex-row w-full min-h-screen gap-4 pt-32 
     text-stone-500"
       >
-        <div className="flex flex-col w-auto p-3 gap-4 text-4xl text-stone-400">
+        <div className="flex flex-col w-auto pl-2 pr-2 gap-4 text-4xl text-stone-400">
           <p className="font-semibold">Boka rum</p>
 
-          <form className="flex flex-row gap-4 xl:flex-col" onSubmit={handleSubmit}>
+          <form className="flex flex-col gap-4 xl:flex-col" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-4">
 
               <div
@@ -111,6 +117,8 @@ export default function Calendar() {
                     className="text-xl w-60 h-12"
                     value={selectedDate}
                     onChange={handleValueChange}
+                    min={today}
+                    max={futureDate}
                   />
               </div>
             </div>
