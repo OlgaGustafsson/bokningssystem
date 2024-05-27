@@ -114,6 +114,22 @@ export const fetchBookings = async () => {
   }
 };
 
+// getBookingsByStartDate
+export const getBookingsByStartDate = async () => {
+  try {
+    const today = new Date().toISOString().split("T")[0];
+    const response = await fetch("/api/bookings");
+    if (response.ok) {
+      const data = await response.json();
+      const filteredBookings = data.filter((booking: { booking_date: string; }) => booking.booking_date >= today);
+      return filteredBookings;
+    } else {
+      throw new Error('Fel vid hämtning av bokningar');
+    }
+  } catch (error) {
+    console.error("Något gick fel:", error);
+  }
+};
 
 
 export async function getBookingById(booking_id: string) {
