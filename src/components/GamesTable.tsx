@@ -59,7 +59,7 @@ const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
   }, [bookings, startDate, endDate, selectedCategory]);
 
   return (
-    <div className="flex flex-col justify-center overflow-x-auto pl-2 pr-2">
+    <div className="flex flex-col justify-center overflow-x-auto pt-4 pl-2 pr-2">
       <div className="flex flex-row gap-4 pb-4">
         {/* Startdatum */}
         <div className="flex justify-center mt-4">
@@ -69,7 +69,7 @@ const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="border p-2 rounded-md mr-2"
+              className="p-2 rounded-md mr-2 bg-stone-100"
               min={today}
               max={futureDate}
             />
@@ -84,7 +84,7 @@ const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="border p-2 rounded-md mr-2"
+              className="p-2 rounded-md mr-2 bg-stone-100"
               min={today}
               max={futureDate}
             />
@@ -93,11 +93,12 @@ const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
       </div>
 
       <div className="flex flex-row gap-4 text-stone-400">
-        <div className="flex justify-start mb-6">
+        <div className="flex justify-start mb-12 mt-4">
           <label htmlFor="sortSelect" className="mr-2">
             Sortera efter kategori:
           </label>
           <select
+            className="rounded-md bg-stone-100"
             value={selectedCategory}
             onChange={(e) => {
               setSelectedCategory(e.target.value);
@@ -117,44 +118,46 @@ const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
         <div className="flex justify-start mb-6"></div>
       </div>
 
-      <table className="table-auto border-collapse border border-solid mb-8">
-        <thead>
-          <tr>
-            <th className="border border-solid p-2 text-start">Bokning</th>
-            <th className="border border-solid p-2 text-start">Datum</th>
-            <th className="border border-solid p-2 text-start">Namn</th>
-            <th className="border border-solid p-2 text-start">Rum</th>
-            <th className="border border-solid p-2 text-start">
-              Spel/ aktivitet
-            </th>
-            <th className="border border-solid p-2 text-start">Tid</th>
-            <th className="border border-solid p-2 text-start">Kommentar</th>
-            <th className="border border-solid p-2 text-start">Max spelare</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredBookings.map((booking) => (
-            <tr key={booking.booking_id}>
-              <td className="border border-solid p-2">{booking.booking_id}</td>
-              <td className="border border-solid p-2">
-                {formatDate(booking.booking_date)}
-              </td>
-              <td className="border border-solid p-2">{booking.user_name}</td>
-              <td className="border border-solid p-2">{booking.room_name}</td>
-              <td className="border border-solid p-2">
-                {booking.game_category}
-              </td>
-              <td className="border border-solid p-2">{formatTime(booking.time)}</td>
-              <td className="border border-solid p-2">
-                {booking.booking_description}
-              </td>
-              <td className="border border-solid p-2">
-                {booking.booking_max_players}
-              </td>
+      <div className="flex flex-col h-92 overflow-y-auto">
+        <table className="table-auto border-collapse mb-8">
+          <thead>
+            <tr>
+              <th className="p-2 text-start">Bokning</th>
+              <th className="p-2 text-start">Datum</th>
+              <th className="p-2 text-start">Namn</th>
+              <th className="p-2 text-start">Rum</th>
+              <th className="p-2 text-start">
+                Spel/ aktivitet
+              </th>
+              <th className="p-2 text-start">Tid</th>
+              <th className="p-2 text-start">Kommentar</th>
+              <th className="p-2 text-start">Max spelare</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredBookings.map((booking) => (
+              <tr key={booking.booking_id} className="odd:bg-white even:bg-stone-100 h-16">
+                <td className="p-2">{booking.booking_id}</td>
+                <td className="p-2">
+                  {formatDate(booking.booking_date)}
+                </td>
+                <td className="p-2">{booking.user_name}</td>
+                <td className="p-2">{booking.room_name}</td>
+                <td className="p-2">
+                  {booking.game_category}
+                </td>
+                <td className="p-2">{formatTime(booking.time)}</td>
+                <td className="p-2">
+                  {booking.booking_description}
+                </td>
+                <td className="p-2">
+                  {booking.booking_max_players}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

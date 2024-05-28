@@ -30,7 +30,7 @@ export default function Games() {
   };
 
   return (
-    <div className="flex flex-col w-full min-h-screen pt-36 text-stone-500">
+    <div className="flex flex-col w-full min-h-screen pt-28 text-stone-500">
       <div className="flex justify-center items-center">
         <h2 className="text-4xl font-semibold pb-6 text-stone-400">
           Se alla bokningar
