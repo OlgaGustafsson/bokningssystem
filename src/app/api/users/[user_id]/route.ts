@@ -12,14 +12,15 @@ export async function GET(req: NextRequest, {params}: {params: {user_id: string}
       return NextResponse.error("Missing user ID", { status: 400 });
     }
 
-    // fråga databasen för användarinformation och deras bokningar baserat på det angivna ID:et
+    // användarinformation och deras bokningar baserat på ID:et
     const result = await query({
       query: `
-      SELECT u.*, b.*, r.room_name, b.booking_date, g.game_category
+      SELECT u.*, b.*, r.room_name, b.booking_date, g.game_category, t.time
       FROM users u
       LEFT JOIN bookings b ON u.user_id = b.booking_user_id
       LEFT JOIN rooms r ON b.booking_room_id = r.room_id
       LEFT JOIN games g ON b.booking_game_id = g.game_id
+      LEFT JOIN times t ON b.booking_time_id = t.time_id
       WHERE u.user_id = ?
       `,
       values: [user_id],

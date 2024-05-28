@@ -5,6 +5,8 @@ import { MdOutlineDeleteForever } from "react-icons/md";
 import Link from 'next/link';
 import { deleteBooking, fetchBookings, fetchUsers, getBookingsForUser } from '@/utils/api';
 import { Booking, User } from '../../../interface';
+import { formatDate } from '@/utils/formatDate';
+import { formatTime } from '@/utils/formatTime';
 
 export default function MyPage() {
 
@@ -14,10 +16,10 @@ export default function MyPage() {
     // const userId = localStorage.getItem('user_id');
     // console.log(userId);
 
-    const formatDate = (date: string | number | Date) => {
-        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-        return new Date(date).toLocaleDateString('sv-SE');
-      };
+    // const formatDate = (date: string | number | Date) => {
+    //     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    //     return new Date(date).toLocaleDateString('sv-SE');
+    //   };
 
 
     useEffect(() => {
@@ -148,7 +150,7 @@ export default function MyPage() {
                                 <div className="flex lg:flex-row md:flex-row sm:flex-col gap-4">
                                     <p className="flex-grow">Datum: {formatDate(booking.booking_date)}</p>
                                     <p className="flex-grow">Rum: {booking.room_name}</p>
-                                    <p className="flex-grow">Tid: {booking.time}</p>
+                                    <p className="flex-grow">Tid: {formatTime(booking.time)}</p>
                                     <p className="flex-grow">Spel: {booking.game_category}</p>
                                 
                                     <MdOutlineDeleteForever
