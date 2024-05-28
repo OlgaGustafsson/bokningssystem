@@ -13,6 +13,7 @@ export default function Navbar() {
     if (isLoggedIn) {
       setIsLoggedIn(false);
       router.push("/");
+      localStorage.clear();
     } else {
       setShowModal(true);
       //router.push("/start");

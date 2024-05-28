@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Booking, Game } from "../../interface";
+import { Booking, Game, Time } from "../../interface";
 import { formatDate } from "@/utils/formatDate";
 import { fetchGames } from "@/utils/api";
 import { today } from "@/utils/today";
 import { getFutureDate } from "@/utils/futureDate";
+import { formatTime } from "@/utils/formatTime";
 
 interface GamesTableProps {
   bookings: Booking[];
@@ -143,7 +144,7 @@ const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
               <td className="border border-solid p-2">
                 {booking.game_category}
               </td>
-              <td className="border border-solid p-2">{booking.time}</td>
+              <td className="border border-solid p-2">{formatTime(booking.time)}</td>
               <td className="border border-solid p-2">
                 {booking.booking_description}
               </td>
