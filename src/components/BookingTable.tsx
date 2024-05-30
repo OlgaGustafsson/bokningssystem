@@ -171,8 +171,8 @@ export default function BookingTable({
         </div>
       </div>
 
-      <div className="overflow-x-auto xl:w-max">
-        <table className="table table-zebra border border-solid-stone-500 md:w-full">
+      <div className="overflow-x-auto w-min-screen">
+        <table className="table border border-solid-stone-500 w-full">
           {/* head */}
           <thead>
             <tr>
@@ -259,6 +259,7 @@ export default function BookingTable({
                   placeholder="Skriv kommentar"
                   value={comment}
                   onChange={handleCommentChange}
+                  maxLength={100}
                 />
               </td>
               {/* <td>

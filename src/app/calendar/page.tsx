@@ -85,11 +85,11 @@ export default function Calendar() {
   return (
     <>
       <div
-        className="flex flex-col xl:flex-row w-full min-h-screen gap-4 pt-32 
+        className="flex flex-col xl:flex-col w-full min-h-screen gap-4 pt-32 
     text-stone-500"
       >
         <div className="flex flex-col w-auto pl-2 pr-2 gap-4 text-4xl text-stone-400">
-          <p className="font-semibold">Boka rum</p>
+          <p className="font-semibold pb-4">Boka rum</p>
 
           <form
             className="flex flex-col gap-4 xl:flex-col"
@@ -103,7 +103,7 @@ export default function Calendar() {
                 <input
                   key={selectedDate}
                   type="date"
-                  className="text-xl w-60 h-12"
+                  className="text-xl w-64 h-12 pl-2 rounded-md mr-2 bg-stone-100 border-none"
                   value={selectedDate}
                   onChange={handleValueChange}
                   min={today}
@@ -119,7 +119,7 @@ export default function Calendar() {
               >
                 <label>
                   <select
-                    className="w-60 pt-2"
+                    className="w-64 h-12 pl-2 rounded-md mr-2 bg-stone-100 border-none"
                     value={selectedRoom}
                     onChange={handleRoomChange}
                   >
@@ -137,7 +137,7 @@ export default function Calendar() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <div className="flex flex-col">
+              <div className="flex flex-col pt-4">
                 <button
                   type="submit"
                   className="flex justify-center items-center text-xl w-32 h-12 

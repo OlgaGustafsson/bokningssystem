@@ -147,10 +147,10 @@ const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
                   {booking.game_category}
                 </td>
                 <td className="p-2">{formatTime(booking.time)}</td>
-                <td className="p-2">
+                <td className="p-2 w-48">
                   {booking.booking_description}
                 </td>
-                <td className="p-2">
+                <td className="p-2 w-8">
                   {booking.booking_max_players}
                 </td>
               </tr>
