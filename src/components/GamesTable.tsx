@@ -118,7 +118,7 @@ const GamesTable: React.FC<GamesTableProps> = ({ bookings }) => {
         <div className="flex justify-start mb-6"></div>
       </div>
 
-      <div className="flex flex-col h-92 overflow-y-auto">
+      <div className="flex flex-col h-[600px] overflow-y-auto">
         <table className="table-auto border-collapse mb-8">
           <thead>
             <tr>
