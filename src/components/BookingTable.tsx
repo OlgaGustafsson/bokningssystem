@@ -13,7 +13,6 @@ export default function BookingTable({
   roomName,
   selectedDate,
 }: BookingTableProps) {
-  // console.log("selectedDate in BookingTable:", selectedDate);
 
   const [selectedCategory, setSelectedCategory] = useState("alla");
   const [isOpen, setIsOpen] = useState(false);
@@ -27,8 +26,6 @@ export default function BookingTable({
   const [games, setGames] = useState<Game[]>([]);
 
   const router = useRouter();
-
-  //const date = localStorage.getItem("selectedDate");
 
   
   useEffect(() => {
@@ -49,28 +46,6 @@ export default function BookingTable({
       });
   }, []);
   
-
-//   const toggleBooking = () => {
-//     setBookingStatus(!bookingStatus);
-
-//     localStorage.setItem("bookingStatus", !bookingStatus ? "true" : "false");
-
-//     if (bookingStatus) {
-//       console.log("Avbokning");
-//     } else {
-//       console.log("Bokning");
-//     }
-//   };
-
-  // const handleBookingChange = (event) => {
-  //     const newBookingStatus = event.target.value;
-  //     setBookingStatus(newBookingStatus);
-  //     if (newBookingStatus) {
-  //         console.log("bokning");
-  //     } else {
-  //         console.log("avbokning");
-  //     }
-  // };
 
   const handleCategoryChange = (event: { 
     preventDefault: () => void; 
@@ -117,8 +92,6 @@ export default function BookingTable({
       (!isOpen || maxPlayers !== "") &&
       selectedTime !== "" &&
       comment !== "" 
-    //   &&
-    //   bookingStatus === true
     );
   };
 
@@ -171,9 +144,114 @@ export default function BookingTable({
         </div>
       </div>
 
-      <div className="overflow-x-auto w-min-screen">
+      {/* update */}
+      <div className="text-xl text-stone-400 flex flex-col gap-4 pb-8">
+        <div className="text-xl text-stone-400 flex flex-row gap-2 pb-8">
+          <div>Datum:</div>
+          <div className="text-stone-500 font-bold border border-solid 
+                        rounded-md border-orange-300 pl-2 pr-2">
+            {selectedDate}
+          </div>
+        </div>
+
+        <div className="flex flex-col border border-solid rounded-md bg-stone-50
+                        w-96 pl-2">
+          <div className="text-xl text-stone-400 flex flex-row gap-2 pb-4 pt-2">
+            <div>Kategori:</div>
+            <select
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+            >
+              <option value="">Välj kategori</option>
+                {games.length > 0 &&
+                  games.map((game) => (
+                    <option key={game.game_id} value={game.game_id}>
+                      {game.game_category}
+                    </option>
+                  ))}
+              </select>
+          </div>
+
+          <div className="text-xl text-stone-400 flex flex-row gap-2 pb-4 pt-4">
+            <div>Öppen:</div>
+            <select
+              value={isOpen.toString()}
+              onChange={handleOpenStatusChange}
+            >
+              <option value="">Välj</option>
+              <option value="true">Ja</option>
+              <option value="false">Nej</option>
+            </select>
+          </div>
+
+          <div className="text-xl text-stone-400 flex flex-row gap-2 pb-4">
+            <div>Deltagare:</div>
+            {isOpen && (
+              <select value={maxPlayers} onChange={handleMaxPlayersChange}>
+                <option value=""> Välj antal deltagare</option>
+                <option value="5">Max 5</option>
+                <option value="10">Max 10</option>
+                <option value="15">Max 15</option>
+                </select>
+              )}
+          </div>
+
+          <div className="text-xl text-stone-400 flex flex-row gap-2 pb-8">
+            <div>Tid:</div>
+            <select value={selectedTime} onChange={handleTimeChange}>
+              <option value="">Välj tid</option>
+
+                {times.map((time) => (
+                  <option key={time.time_id} value={time.time_id}>
+                    {time.time}
+                  </option>
+                ))}
+              </select>
+          </div>
+
+          <div className="text-xl text-stone-400 flex flex-col gap-2 pb-4">
+            <div>Kommentar:</div>
+            <textarea
+              className="max-w-64 max-h-96 border border-solid rounded-md border-stone-300"
+              placeholder="Skriv din kommentar"
+              value={comment}
+              onChange={handleCommentChange}
+              maxLength={100}
+            />
+
+          </div>
+        </div>
+
+        <div className="flex flex-row justify-left gap-3 pt-4 pb-8">
+          <Link href="/">
+            <button
+              className="flex justify-center items-center text-xl w-32 h-12 
+                rounded-xl border border-stone-900 bg-white hover:bg-stone-100
+                text-stone-500"
+            >
+              Tillbaka
+            </button>
+          </Link>
+
+          <button
+            className="flex justify-center items-center text-xl w-32 h-12 
+                rounded-xl border border-stone-500 bg-stone-500 hover:bg-stone-100
+                text-white"
+            type="submit"
+            onClick={handleSaveBooking}
+          >
+            Spara
+          </button>
+        </div>
+
+
+      </div>
+
+      {/* update */}
+
+
+      {/* <div className="overflow-x-auto w-min-screen">
         <table className="table border border-solid-stone-500 w-full">
-          {/* head */}
           <thead>
             <tr>
               <th className="border border-solid-stone-500 text-left">Datum</th>
@@ -188,7 +266,6 @@ export default function BookingTable({
               <th className="border border-solid-stone-500 text-left">
                 Kommentar
               </th>
-              {/* <th className="border border-solid-stone-500 text-left">Boka</th> */}
             </tr>
           </thead>
           <tbody className="border border-solid-stone-500">
@@ -202,11 +279,7 @@ export default function BookingTable({
                   onChange={handleCategoryChange}
                 >
                   <option value="">Välj kategori</option>
-                  {/* <option value="alla">Alla kategorier</option>
-                                <option value="kortspel">Kortspel</option>
-                                <option value="rollspel">Rollspel</option>
-                                <option value="brädspel">Brädspel</option> */}
-
+      
                   {games.length > 0 &&
                     games.map((game) => (
                       <option key={game.game_id} value={game.game_id}>
@@ -244,13 +317,6 @@ export default function BookingTable({
                       {time.time}
                     </option>
                   ))}
-
-                  {/* <option value="heldag">Hel dag</option> */}
-                  {/* <option value="1">10.00</option>
-                                <option value="2">12.00</option>
-                                <option value="3">14.00</option>
-                                <option value="4">16.00</option>
-                                <option value="5">18.00</option> */}
                 </select>
               </td>
               <td className="border border-solid-stone-500">
@@ -262,15 +328,6 @@ export default function BookingTable({
                   maxLength={100}
                 />
               </td>
-              {/* <td>
-                <input
-                  type="radio"
-                  className="form-radio flex h-5 w-5"
-                  checked={bookingStatus}
-                  onClick={toggleBooking}
-                  //onClick={handleBookingChange}
-                />
-              </td> */}
             </tr>
           </tbody>
         </table>
@@ -297,7 +354,8 @@ export default function BookingTable({
         >
           Spara
         </button>
-      </div>
+      </div> */}
+
     </div>
   );
 }
