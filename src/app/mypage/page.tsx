@@ -7,6 +7,7 @@ import { deleteBooking, fetchBookings, fetchUsers, getBookingsForUser } from '@/
 import { Booking, User } from '../../../interface';
 import { formatDate } from '@/utils/formatDate';
 import { formatTime } from '@/utils/formatTime';
+import { today } from '@/utils/today';
 
 export default function MyPage() {
 
@@ -22,7 +23,9 @@ export default function MyPage() {
                 const data: Booking[] = await fetchBookings();
                 console.log(data);
                 if (data && data.length > 0) {
-                const userBookings = data.filter(data  => data.booking_user_id.toString() === userId);
+                const userBookings = data.filter(data  => data.booking_user_id.toString() === userId &&
+                new Date(data.booking_date).toISOString().split("T")[0] >= today
+                );
                 setBookings(userBookings);
                 console.log(userBookings);
                 } else {
