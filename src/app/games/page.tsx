@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { Booking } from "../../../interface";
-import Link from "next/link";
-import { formatDate } from "@/utils/formatDate";
+//import Link from "next/link";
+//import { formatDate } from "@/utils/formatDate";
 import GamesTable from "@/components/GamesTable";
 import { fetchBookings, getBookingsByStartDate } from "@/utils/api";
 
@@ -11,7 +11,7 @@ export default function Games() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [showGamesTable, setShowGamesTable] = useState(false);
 
-  // Funktion för att hantera visning av bokningar f.o.m. idag
+  // hämta alla bokningar f.o.m. idag
   const handleShowBookings = async () => {
     try {
       setShowGamesTable(true);
@@ -19,7 +19,7 @@ export default function Games() {
       //const data = await fetchBookings();
       const data = await getBookingsByStartDate();
       setBookings(data);
-      console.log(data);
+      //console.log(data);
     } catch (error) {
       console.error("Något gick fel", error);
     }
@@ -37,7 +37,7 @@ export default function Games() {
         </h2>
       </div>
 
-      <div className="flex flex-row justify-center gap-3 pt-8">
+      <div className="flex flex-row justify-center gap-3 pt-8 pb-4">
         {showGamesTable && (
           <button
             onClick={handleHideBookings}
@@ -58,9 +58,6 @@ export default function Games() {
           Visa
         </button>
       </div>
-
-      {/* Knapp för att visa bokningar för den valda perioden */}
-      <div className="flex justify-center mt-4"></div>
 
       {/* Alla bokningar */}
       <div className="mt-8">
