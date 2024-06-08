@@ -41,7 +41,6 @@ export default function Calendar() {
     const room = event.target.value;
     setSelectedRoom(room);
     localStorage.setItem("selectedRoom", room);
-    //setRoomName(selectedRoomName);
   };
 
   // room_name
@@ -64,22 +63,11 @@ export default function Calendar() {
       return;
     }
 
-    console.log("selected value:", selectedDate);
-    console.log("selected room:", selectedRoom);
-
     // visa bokningstabellen
     setShowBookingTable(true);
     localStorage.setItem("selectedRoomName", selectedRoomName);
     setRoomName(selectedRoomName);
     setSelectedDate(selectedDate);
-
-    // setSelectedDate("");
-    // setSelectedRoom("");
-    //localStorage.clear();
-
-    console.log(selectedDate);
-    console.log(typeof selectedDate);
-    console.log("Value of selectedDate in Calendar:", selectedDate);
   };
 
   return (

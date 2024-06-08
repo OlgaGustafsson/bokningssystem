@@ -162,8 +162,8 @@ export async function getBookingById(booking_id: string) {
   
 export async function deleteBooking(booking_id: number) {
   try {
-    console.log('Försöker ta bort bokning med ID:', booking_id);
-    console.log(typeof booking_id);
+    //console.log('Försöker ta bort bokning med ID:', booking_id);
+    //console.log(typeof booking_id);
     const response = await fetch(`/api/bookings/${booking_id}`, {
       method: 'DELETE',
       // headers: {
