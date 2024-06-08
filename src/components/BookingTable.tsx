@@ -136,7 +136,8 @@ export default function BookingTable({
     <div className="pt-10 text-md">
       <div className="text-xl pb-4 text-stone-400 flex flex-row gap-2">
         <div>Här kan du boka:</div>
-        <div className="text-stone-500 font-bold">
+        <div className="text-stone-500 font-bold border border-solid 
+                        rounded-md border-orange-300 pl-2 pr-2">
           {/* {localStorage.getItem("selectedRoomName")} */}
           {roomName}
         </div>
@@ -153,7 +154,7 @@ export default function BookingTable({
         </div>
 
         <div className="flex flex-col border border-solid rounded-md bg-stone-50
-                        w-96 pl-2">
+                        w-96 pl-2 pt-2 pb-2">
           <div className="text-xl text-stone-400 flex flex-row gap-2 pb-4 pt-2">
             <div>Kategori:</div>
             <select
