@@ -16,7 +16,6 @@ export default function Navbar() {
       localStorage.clear();
     } else {
       setShowModal(true);
-      //router.push("/start");
     }
   };
 
@@ -24,7 +23,7 @@ export default function Navbar() {
     if (isLoggedIn) {
       router.push("/calendar");
     } else {
-      alert("Du måste logga in för att kunna göra en bokning.")
+      alert("Logga in för att göra en bokning.")
     }
   }
 
@@ -32,7 +31,7 @@ export default function Navbar() {
     if (isLoggedIn) {
       router.push("/mypage");
     } else {
-      alert("Du måste logga in för att kunna gå in på Min sida.")
+      alert("Logga in för att gå in på Min sida.")
       router.push("/");
     }
   }
@@ -48,9 +47,8 @@ export default function Navbar() {
       });
       
       const data = await response.json();
-      console.log('Data:', data);
+      //console.log('Data:', data);
       
-      //const data = await response.json();
     if (response.ok && data.message === 'Inloggningen lyckades') {
 
       localStorage.setItem("user_id", data.user_id);
