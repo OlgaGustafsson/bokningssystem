@@ -23,7 +23,7 @@ const Login: React.FC<LoginProps> = ({ isOpen, onClose, onLogin }) => {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     onLogin(email, password);
-    console.log(email, password);
+    //console.log(email, password);
   };
 
   const handleClose = () => {
@@ -77,8 +77,6 @@ const Login: React.FC<LoginProps> = ({ isOpen, onClose, onLogin }) => {
               </div>
               <button
                 type="submit"
-                // className="bg-blue-500 text-white text-xl px-8 py-4
-                //           rounded-md hover:bg-blue-600"
                 className="flex justify-center items-center text-xl w-32 h-12 
                 rounded-xl border border-stone-500 bg-stone-500 hover:bg-stone-100
                 text-white"
