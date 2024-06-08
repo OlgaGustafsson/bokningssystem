@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { MdOutlineDeleteForever } from "react-icons/md";
+import { MdOutlineDeleteForever, MdOutlineModeEditOutline  } from "react-icons/md";
 import Link from "next/link";
 import { deleteBooking, fetchBookings } from "@/utils/api";
 import { Booking, User } from "../../../interface";
 import { formatDate } from "@/utils/formatDate";
 import { formatTime } from "@/utils/formatTime";
 import { today } from "@/utils/today";
+//import { MdOutlineModeEditOutline } from "react-icons/md";
 
 export default function MyPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -73,8 +74,8 @@ export default function MyPage() {
 
       <div className="overflow-x-auto flex flex-col items-left pb-4 pl-8 pr-8 sm:pl-8 sm:pr-8">
         <div className="bg-stone-100 h-40 rounded-md">
-          <p className="pl-10 pt-10 text-xl text-stone-400">Medlem:</p>
-          <p className="pl-10 pt-10 text-2xl text-blue-600">
+          <p className="pl-8 pt-8 text-2xl text-stone-400 font-bold">Medlem:</p>
+          <p className="pl-8 pt-8 text-2xl text-blue-600">
             {localStorage.getItem("user_name")}
           </p>
         </div>
@@ -82,36 +83,42 @@ export default function MyPage() {
 
       <div className="flex flex-col items-left pb-4 pl-8 pr-8 sm:pl-8 sm:pr-8">
         <div className="bg-stone-50 h-40 rounded-md">
-          <p className="pl-10 pt-10 text-xl text-stone-400">Medlemsavgift:</p>
-          <p className="pl-10 pt-10 text-2xl text-green-600">...</p>
+          <p className="pl-8 pt-8 text-2xl text-stone-400 font-bold">Medlemsavgift:</p>
+          <p className="pl-8 pt-8 text-2xl text-green-600">...</p>
         </div>
       </div>
 
       <div className="flex flex-col items-left pl-8 pr-8 sm:pl-8 sm:pr-8">
         <div className="bg-stone-100 h-auto pb-10 rounded-md">
-          <p className="pl-10 pt-10 text-xl text-stone-400">Mina bokningar:</p>
+          <p className="pl-8 pt-8 text-2xl text-stone-400 font-bold">Mina bokningar:</p>
 
           <div className="flex flex-col justify-between pr-8">
-            <ul className="pl-10 pt-6 flex flex-col gap-4 overflow-x-auto">
+            <ul className="pl-8 pt-8 flex flex-col gap-8 overflow-x-auto">
               {bookings.map((booking) => (
                 <li
                   key={booking.booking_id}
                   //href={`/mypage/${booking.booking_id}`}
                   className="text-lg text-stone-500 border border-solid rounded-md 
-                                        p-2 flex flex-col bg-stone-50"
+                            pl-2 pt-4 pb-4 flex flex-col bg-stone-50"
                 >
-                  <div className="flex xl:flex-row lg:flex-row md:flex-col sm:flex-col gap-4">
+                  <div className="flex flex-col gap-4">
                     <p className="flex-grow">
                       Datum: {formatDate(booking.booking_date)}
                     </p>
                     <p className="flex-grow">Rum: {booking.room_name}</p>
-                    <p className="flex-grow">Tid: {formatTime(booking.time)}</p>
+                    <p className="flex-grow pb-4">Tid: {formatTime(booking.time)}</p>
                     <p className="flex-grow">Spel: {booking.game_category}</p>
+                    <p className="flex-grow">Kommentar: {booking.booking_description}</p>
 
-                    <MdOutlineDeleteForever
-                      onClick={() => handleRemoveBooking(booking.booking_id)}
-                      className="text-3xl text-orange-300"
-                    />
+                    <div className="flex flex-row gap-8">
+                      <MdOutlineDeleteForever
+                        onClick={() => handleRemoveBooking(booking.booking_id)}
+                        className="text-4xl text-orange-300"
+                      />
+                      <MdOutlineModeEditOutline
+                        className="text-4xl text-green-600"
+                      />
+                    </div>
                   </div>
                 </li>
               ))}
