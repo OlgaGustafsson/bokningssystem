@@ -52,9 +52,3 @@ npm run dev
 
 
 #
-
-#
-
-![Bokningsystem](./public/images/bookings.png)
-
-#
