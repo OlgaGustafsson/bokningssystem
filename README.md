@@ -55,6 +55,6 @@ npm run dev
 
 #
 
-![Bokningsystem](./images/bookings.png)
+![Bokningsystem](./public/images/bookings.png)
 
 #
