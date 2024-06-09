@@ -9,7 +9,7 @@ export async function GET(req: NextRequest, {params}: {params: {user_id: string}
 
     // kontrollera om användar-ID är tillgängligt
     if (!user_id) {
-      return NextResponse.error("Missing user ID", { status: 400 });
+      return NextResponse.error();
     }
 
     // användarinformation och deras bokningar baserat på ID:et

@@ -5,7 +5,6 @@ export async function GET(req: NextRequest, res: Response) {
 
   try {
   const result = await query({
-    // query: "SELECT * FROM bookings ORDER BY booking_date DESC",
     query: `
         SELECT b.booking_id, b.booking_date, u.user_name, r.room_name, g.game_category, g.game_id,
         t.time, b.booking_description, b.booking_max_players, b.booking_private, b.booking_user_id
@@ -43,10 +42,10 @@ export async function POST(req: Request, res: Response) {
 
     // validera data innan man infogar i databasen
     if (!booking_user_id || !booking_room_id || !booking_date || !booking_time_id) {
-      return NextResponse.error("Missing required fields", { status: 400 });
+      return NextResponse.error();
     }
 
-    // Kolla om tiden redan är upptagen innan m infogar bokningen i databasen
+    // Kolla om tiden (date, room) redan är upptagen innan m infogar bokningen i databasen
     const existingBookings = await query({
       query: "SELECT * FROM bookings WHERE booking_date = ? AND booking_room_id = ? AND booking_time_id = ?",
       values: [booking_date, booking_room_id, booking_time_id],
@@ -55,7 +54,7 @@ export async function POST(req: Request, res: Response) {
 
     if (existingBookings.length > 0) {
       // Tiden är redan upptagen, returnera ett felmeddelande
-      return NextResponse.error("Den valda tiden är redan upptagen. Vänligen välj en annan tidpunkt", { status: 400 });
+      return NextResponse.error();
     }
 
 

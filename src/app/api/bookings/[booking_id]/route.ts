@@ -10,9 +10,6 @@ export async function GET(req: NextRequest, {params}: {params: {booking_id: stri
 
         const result = await query({
         query: 
-        // "SELECT * FROM bookings WHERE booking_id=" + 
-        // parseInt(booking_id),
-
             `
                 SELECT u.*, b.*, r.room_name, g.game_category, t.time
                 FROM bookings b
@@ -31,32 +28,7 @@ export async function GET(req: NextRequest, {params}: {params: {booking_id: stri
   }
 
 
-  // === DELETE =======
-
-
-// DELETE en bokning permanent 
-// export async function DELETE(req: NextRequest, res: Response) {
-//   try {
-//     const { booking_id } = req.body;
-
-//     // Validera att booking_id finns
-//     if (!booking_id) {
-//       return NextResponse.error("Missing booking_id", { status: 400 });
-//     }
-
-//     // Ta bort bokningen permanent från databasen
-//     const result = await query({
-//       query: "DELETE FROM bookings WHERE booking_id = ?",
-//       values: [booking_id],
-//     });
-
-//     return NextResponse.json(result);
-//   } catch (error) {
-//     console.error("Error deleting booking:", error);
-//     return NextResponse.error();
-//   }
-// }
-
+  // === DELETE ====
 
 export async function DELETE(
   req: Request, 
@@ -66,7 +38,7 @@ export async function DELETE(
   console.log("booking_id", booking_id);
 
   if (!booking_id) {
-    return NextResponse.error("Missing booking_id", { status: 400 });
+    return NextResponse.error();
 }
   
   const result = await query ({
