@@ -5,8 +5,6 @@ export async function fetchRooms() {
       const response = await fetch("/api/rooms");
       if (response.ok) {
         const data = await response.json();
-        //console.log("Rooms data:", data); 
-        //setRooms(data);
         return data;
       } else {
         console.error("Failed to fetch rooms:", response.statusText);
@@ -22,8 +20,6 @@ export async function fetchRooms() {
 
       if (response.ok) {
         const data = await response.json();
-        //console.log(data);
-        //setGames(data);
         return data;
       }
     } catch (error) {
@@ -37,8 +33,6 @@ export async function fetchRooms() {
 
       if (response.ok) {
         const data = await response.json();
-        //console.log(data);
-        //setTimes(data);
         return data;
       }
     } catch (error) {
@@ -52,8 +46,6 @@ export async function fetchRooms() {
 
       if (response.ok) {
         const data = await response.json();
-        //console.log(data);
-        //setUsers(data);
         return data;
       }
     } catch (error) {
@@ -74,7 +66,6 @@ export async function fetchRooms() {
         const data = await response.json();
         console.log("Booking successfuflly created:", data);
         alert("Du har skapat en bokning");
-        // uppdatera state eller gör andra åtgärder t.ex. skicka användaren till "/start" eller "/mypage"
       } else {
         console.error("Failed to create booking:", response.statusText);
         alert("Vänligen, välj en annan tid.")
@@ -145,31 +136,12 @@ export async function getBookingById(booking_id: string) {
   }
 }
 
-// export async function getBookingById({params} : {params : {booking_id: string}}) {
-//   try {
-//       const response = await fetch(`/api/bookings/${params.booking_id}`);
-
-//       if (response.ok) {
-//       const data = await response.json();
-//       console.log("API Response Data:", data);
-//       return data;
-//       }
-//   } catch (error) {
-//       console.error('Error fetching post data:', error);
-//   }
-// };
-
   
 export async function deleteBooking(booking_id: number) {
   try {
     //console.log('Försöker ta bort bokning med ID:', booking_id);
-    //console.log(typeof booking_id);
     const response = await fetch(`/api/bookings/${booking_id}`, {
       method: 'DELETE',
-      // headers: {
-      //   'Content-Type': 'application/json',
-      // },
-      // body: JSON.stringify({ booking_id: booking_id }),
     });
 
     if (!response.ok) {
