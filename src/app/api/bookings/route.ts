@@ -1,4 +1,5 @@
 import { query } from "@/lib/db";
+import { RowDataPacket } from "mysql2";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(req: NextRequest, res: Response) {
@@ -49,7 +50,7 @@ export async function POST(req: Request, res: Response) {
     const existingBookings = await query({
       query: "SELECT * FROM bookings WHERE booking_date = ? AND booking_room_id = ? AND booking_time_id = ?",
       values: [booking_date, booking_room_id, booking_time_id],
-    });
+    }) as RowDataPacket[];
     console.log('Existing bookings:', existingBookings);
 
     if (existingBookings.length > 0) {

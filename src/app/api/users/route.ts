@@ -1,4 +1,5 @@
 import { query } from "@/lib/db";
+import { RowDataPacket } from "mysql2";
 import { NextResponse } from "next/server";
 
 
@@ -26,7 +27,7 @@ export async function POST(req: Request, res: Response) {
     const user = await query({
       query: "SELECT * FROM users WHERE user_email = ?",
       values: [email]
-    });
+    }) as RowDataPacket[];
 
     // Kontrollera om användaren inte hittades i databasen
     if (user.length === 0) {
@@ -47,85 +48,4 @@ export async function POST(req: Request, res: Response) {
     return NextResponse.json({ error: 'Serverfel' });
   }
 }
-
-
-
-// ============
-
-
-// export async function POST(req: Request, res: Response) {
-//   try {
-//     const { email, password, user_name } = await req.json();
-
-//     // Kontrollera om användaren redan finns i databasen
-//     const userExists = await query({
-//       sql: "SELECT * FROM users WHERE user_email = ?",
-//       values: [email]
-//     });
-
-//     if (Array.isArray(userExists) && userExists.length > 0) {
-//       // Användaren finns redan, försök logga in
-//       const user = userExists[0];
-//       if (password === user.user_password) {
-//         // Inloggning lyckades
-//         return NextResponse.json({ message: 'Inloggningen lyckades', user });
-//       } else {
-//         // Fel lösenord
-//         return NextResponse.json({ error: 'Fel lösenord' });
-//       }
-//     } else {
-//       // Användaren finns inte, registrera ny användare
-//       await query({
-//         sql: "INSERT INTO users (user_email, user_name, user_password) VALUES (?, ?, ?)",
-//         values: [email, user_name, password]
-//       });
-
-//       // Hämta den nya användaren från databasen
-//       const newUser = await query({
-//         sql: "SELECT * FROM users WHERE user_email = ?",
-//         values: [email]
-//       });
-
-//       return NextResponse.json({ message: 'Användaren har registrerats', user: newUser });
-//     }
-//   } catch (error) {
-//     console.error('Fel vid inloggning eller registrering:', error);
-//     return NextResponse.json({ error: 'Serverfel' });
-//   }
-// }
-
-
-
-
-// ====================
-
-
-
-// export async function POST(req: Request, res: Response) {
-//   try {
-//     const { email, user_name } = await req.json();
-
-//     const userExists = await query({
-//       sql: "SELECT * FROM users WHERE user_email = (?)",
-//       values: [email]
-//     });
-//     if (Array.isArray(userExists) && userExists.length > 0) {
-//       return NextResponse.json(userExists);
-//     }
-//     await query({
-//       sql: "INSERT INTO users (user_email, user_name) VALUES (?, ?)",
-//       values: [email, user_name]
-//     });
-
-//     const newUser = await query({
-//       sql: "SELECT * FROM users WHERE user_email = (?)",
-//       values: [email]
-//     });
-//     return NextResponse.json(newUser);
-//   } catch (error) {
-//     return NextResponse.json({ message: error });
-//   }
-// }
-
-
 
