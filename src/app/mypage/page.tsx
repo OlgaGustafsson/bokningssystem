@@ -102,11 +102,11 @@ export default function MyPage() {
                             pl-2 pt-4 pb-4 flex flex-col bg-stone-50"
                 >
                   <div className="flex flex-col gap-4">
-                    <p className="flex-grow">
-                      Datum: {formatDate(booking.booking_date)}
+                    <p className="flex-grow text-xl font-bold">
+                      {formatDate(booking.booking_date)}
                     </p>
-                    <p className="flex-grow">Rum: {booking.room_name}</p>
-                    <p className="flex-grow pb-4">Tid: {formatTime(booking.time)}</p>
+                    <p className="flex-grow text-xl font-bold">{booking.room_name}</p>
+                    <p className="flex-grow pb-4 text-xl font-bold">kl. {formatTime(booking.time)}</p>
                     <p className="flex-grow">Spel: {booking.game_category}</p>
                     <p className="flex-grow">Kommentar: {booking.booking_description}</p>
 
